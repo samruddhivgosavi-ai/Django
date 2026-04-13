@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Students
 # Create your views here.
@@ -43,9 +43,55 @@ def formsave(request):
         cn = request.POST["contact"]
         ci = request.POST["city"]
 
-        s=Students()
+        s=Students(name=n,email=em,password=ps,contact=cn,city=ci)
         s.save() # to insert data
 
-        return HttpResponse ("Registered Successfully")
+        return redirect("/viewstudents")
     else:
-        return HttpResponse ("Registration Failed")
+        return redirect("/registration")
+
+def viewstudents(request):
+    data=Students.objects.all().order_by('-id')
+    return render(request,"viewstudents.html",{'data':data})
+
+def delete(request,id):
+    Students.objects.filter(id=id).delete()
+    return redirect("/viewstudents")
+
+def update(request,id):
+    mydata=Students.objects.filter(id=id)
+    return render(request,"updatestudents.html",{'i':mydata})
+
+def profileupdate(request):
+    if request.method=="POST":
+        id = request.POST["id"]
+
+        s = Students.objects.get(id=id)
+
+        s.name = request.POST["name"]
+        s.email = request.POST["email"]
+        s.password = request.POST["password"]
+        s.contact = request.POST["contact"]
+        s.city = request.POST["city"]
+
+        s.save()
+
+        return redirect("/viewstudents")
+    
+def login(request):
+    return render(request,"login.html")
+
+def logincheck(request):
+    if request.method=="POST":
+        em = request.POST["email"]
+        ps = request.POST["password"]
+
+        data = Students.objects.filter(email=em,password=ps)
+
+        if data:
+            return render(request,"dashboard.html")
+        else:
+            return HttpResponse("Invalid Login")
+        
+def logout(request):
+    return redirect("/login")

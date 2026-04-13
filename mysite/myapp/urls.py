@@ -9,4 +9,11 @@ urlpatterns = [
    path('mul/',views.mul),
    path('registration/',views.registration),
    path('formsave/',views.formsave),
+   path('viewstudents/',views.viewstudents),
+   path('delete/<int:id>',views.delete),
+   path('update/<int:id>',views.update),
+   path('profileupdate/',views.profileupdate),
+   path('login/',views.login),
+   path('logincheck/',views.logincheck),
+   path('logout/',views.logout),
 ]
