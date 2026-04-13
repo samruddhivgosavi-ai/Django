@@ -20,3 +20,13 @@ def sub(request):
     else:
         return HttpResponse("Failed")
 
+def mul(request):
+    if request.method=="POST":
+        num1 = request.POST["first_number"]
+        num2 = request.POST["second_number"]
+
+        output = int(num1) * int(num2)
+
+        return HttpResponse("Multiplication=%d"%output)
+    else:
+        return render(request,"arith.html")

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Calculation Form</h2>
+    <form action="/mul/" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="First Number:" name="first_number">
+        <br><br>
+        <input type="text" placeholder="Second Number:" name="second_number">
+        <br><br>
+        <button>Multiply</button>
+    </form>
+</body>
+</html>
