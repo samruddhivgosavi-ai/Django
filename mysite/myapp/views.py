@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Students
 # Create your views here.
 def index(request):
     return render(request,"index.html")
 
 def home(request):
-    # return render(request,"home.html")
-    return HttpResponse("Homepage")
+    return render(request,"home.html")
+    #return HttpResponse("Homepage")
 
 def sub(request):
     if request.method=="POST":
@@ -30,3 +31,21 @@ def mul(request):
         return HttpResponse("Multiplication=%d"%output)
     else:
         return render(request,"arith.html")
+    
+def registration(request):
+    return render(request,"registration.html")
+
+def formsave(request):
+    if request.method=="POST":
+        n = request.POST["name"]
+        em = request.POST["email"]
+        ps = request.POST["password"]
+        cn = request.POST["contact"]
+        ci = request.POST["city"]
+
+        s=Students()
+        s.save() # to insert data
+
+        return HttpResponse ("Registered Successfully")
+    else:
+        return HttpResponse ("Registration Failed")
