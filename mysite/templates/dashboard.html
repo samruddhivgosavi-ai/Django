@@ -11,6 +11,14 @@
     {% include 'navigation.html'%}
     <h2>Dashboard</h2>
 
+    {{request.session.username}}
+
+    {% for i in data %}
+
+        <p>{{i.name}}</p>
+        <p>{{i.city}}</p>
+    {% endfor %}
+
     <a href="/logout/" class="btn btn-warning">Logout</a>
 </body>
 </html>

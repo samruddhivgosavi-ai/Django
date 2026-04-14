@@ -16,4 +16,7 @@ urlpatterns = [
    path('login/',views.login),
    path('logincheck/',views.logincheck),
    path('logout/',views.logout),
+   path('dashboard/',views.dashboard),
+   path('addcookie/',views.addcookie),
+   path('viewcookie/',views.viewcookie),
 ]

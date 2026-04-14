@@ -89,9 +89,30 @@ def logincheck(request):
         data = Students.objects.filter(email=em,password=ps)
 
         if data:
-            return render(request,"dashboard.html")
+            request.session["username"]=em # session start
+            return redirect("/dashboard/")
         else:
-            return HttpResponse("Invalid Login")
-        
+            return redirect("/login/")
+    else:
+        return HttpResponse("Invalid Login")
+    
+def dashboard(request):
+    if request.session.get("username") is not None:     # session get
+        email = request.session.get("username")
+        data = Students.objects.filter(email=email)
+        return render(request,"dashboard.html",{'data':data})
+    else:
+        return redirect("/login/")
+
 def logout(request):
+    del request.session["username"] # session end
     return redirect("/login")
+
+def addcookie(res):
+    res=HttpResponse("cookies set")
+    res.set_cookie("name","xyz")
+    return res
+
+def viewcookie(request):
+    n=request.COOKIES["name"]
+    return HttpResponse("Name is %s"%n)
