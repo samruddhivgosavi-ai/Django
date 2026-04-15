@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Students
+from .models import Students,document
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -116,3 +116,19 @@ def addcookie(res):
 def viewcookie(request):
     n=request.COOKIES["name"]
     return HttpResponse("Name is %s"%n)
+
+def fileupload(request):
+    return render(request,"fileupload.html")
+
+def filesave(request):
+    if request.method=="POST":
+        em = request.POST["email"]
+        ph = request.FILES["photo"]
+
+        d = document(email=em, photo=ph)
+
+        d.save()
+        return HttpResponse("Uploaded Successfully")
+    else:
+        return HttpResponse("Upload Failed")
+

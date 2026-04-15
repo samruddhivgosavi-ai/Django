@@ -19,4 +19,6 @@ urlpatterns = [
    path('dashboard/',views.dashboard),
    path('addcookie/',views.addcookie),
    path('viewcookie/',views.viewcookie),
+   path('fileupload/',views.fileupload),
+   path('filesave/',views.filesave),
 ]

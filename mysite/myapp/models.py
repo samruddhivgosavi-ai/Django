@@ -17,3 +17,7 @@ class Employee(models.Model):
     emp_salary=models.CharField(max_length=100)
     emp_address=models.CharField(max_length=100)
     emp_department=models.CharField(max_length=100,default="IT")
+
+class document(models.Model):
+    email=models.CharField(max_length=100)
+    photo=models.FileField(upload_to='images')
