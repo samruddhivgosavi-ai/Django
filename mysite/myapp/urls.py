@@ -21,4 +21,5 @@ urlpatterns = [
    path('viewcookie/',views.viewcookie),
    path('fileupload/',views.fileupload),
    path('filesave/',views.filesave),
+   path('form/',views.form),
 ]

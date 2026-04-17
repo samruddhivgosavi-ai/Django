@@ -21,3 +21,8 @@ class Employee(models.Model):
 class document(models.Model):
     email=models.CharField(max_length=100)
     photo=models.FileField(upload_to='images')
+
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    age = models.CharField(max_length=100)

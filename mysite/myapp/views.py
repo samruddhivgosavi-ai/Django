@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Students,document
+from .forms import PersonForm
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -132,3 +133,13 @@ def filesave(request):
     else:
         return HttpResponse("Upload Failed")
 
+def form(request):
+    if request.method=="POST":
+       p=PersonForm(request.POST)
+       if p.is_valid():
+           p.save()
+           return HttpResponse("Saved Successfully")
+    else:
+           p = PersonForm()
+
+    return render(request,"forms.html",{'forms':p})
