@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Students,document
 from .forms import PersonForm
+
+from django.contrib import messages
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -47,8 +49,10 @@ def formsave(request):
         s=Students(name=n,email=em,password=ps,contact=cn,city=ci)
         s.save() # to insert data
 
+        messages.success(request,"Registration Successfully Completed")
         return redirect("/viewstudents")
     else:
+        messages.warning(request,"Failed")
         return redirect("/registration")
 
 def viewstudents(request):
